@@ -12,6 +12,9 @@
         "branch": "",
         "SHA": ""
     },
+    "dependencies": {
+        "npm": "2.15.10"
+    },
     "devDependencies": {
         "grunt": "0.4.5",
         "jasmine-node": "1.11.0",
