@@ -104,9 +104,14 @@ function watchPath(path, ignored) {
                 return;
             }
 
-            var filename_ = filename.replace(/\\/g, "/");
-            var parent = filename_ && (fspath.dirname(filename_) + "/");
-            var name = filename_ && fspath.basename(filename_);
+            if (!filename) {
+                return;
+            }
+            // make sure it's normalized
+            filename = filename.replace(/\\/g, "/");
+
+            var parent = fspath.dirname(filename) + "/";
+            var name = fspath.basename(filename);
             _domainManager.emitEvent("fileWatcher", "change", [parent, type, name, stats]);
         });
 
