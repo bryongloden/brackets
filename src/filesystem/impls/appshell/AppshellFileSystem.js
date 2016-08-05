@@ -78,24 +78,16 @@ define(function (require, exports, module) {
      * Enqueue a file change event for eventual reporting back to the FileSystem.
      *
      * @param {string} changedPath The path that was changed
-     * @param {object} stats Stats coming from the underlying watcher,
-     *                       iff false the eventual change event should not include stats
+     * @param {object} stats Stats coming from the underlying watcher, if available
      * @private
      */
     function _enqueueChange(changedPath, stats) {
-        var needsStats = stats !== false;
-        _pendingChanges[changedPath] = _pendingChanges[changedPath] || needsStats;
-
+        _pendingChanges[changedPath] = stats;
         if (!_changeTimeout) {
             _changeTimeout = window.setTimeout(function () {
                 if (_changeCallback) {
                     Object.keys(_pendingChanges).forEach(function (path) {
-                        var needsStats = _pendingChanges[path];
-                        if (needsStats) {
-                            _changeCallback(path, stats);
-                        } else {
-                            _changeCallback(path);
-                        }
+                        _changeCallback(path, _pendingChanges[path]);
                     });
                 }
 
@@ -126,14 +118,14 @@ define(function (require, exports, module) {
         if (event === "change") {
             // Only register change events if filename is passed
             if (filename) {
-                // an existing file was modified; stats are needed
+                // an existing file was modified; stats are passed
                 change = path + filename;
                 _enqueueChange(change, stats);
             }
         } else if (event === "rename") {
-            // a new file was created; no stats are needed
+            // a new file was created; no stats are passed
             change = path;
-            _enqueueChange(change, false);
+            _enqueueChange(change, null);
         }
     }
 
