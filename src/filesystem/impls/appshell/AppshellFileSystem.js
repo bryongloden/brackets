@@ -545,12 +545,14 @@ define(function (require, exports, module) {
     /**
      * Stop providing change notifications for the file or directory at the
      * given path, calling back asynchronously with a possibly null FileSystemError
-     * string when the operation is complete.
+     * string when the operation is complete. This function needs to mirror the
+     * signature of watchPath and hence the ignored argument is passed from
+     * FileSystem code
      *
      * @param {string} path
      * @param {function(?string)=} callback
      */
-    function unwatchPath(path, callback) {
+    function unwatchPath(path, ignored, callback) {
         _nodeDomain.exec("unwatchPath", path)
             .then(callback, callback);
     }
