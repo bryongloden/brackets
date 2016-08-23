@@ -66,7 +66,7 @@ function unwatchPath(path) {
 
 /**
  * Transform Node's native fs.stats to a format that can be sent through domain
- * @param {stats} Node's fs.stats result
+ * @param {stats} nodeFsStats Node's fs.stats result
  * @return {object} Can be consumed by new FileSystemStats(object); in Brackets
  */
 function normalizeStats(nodeFsStats) {
