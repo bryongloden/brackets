@@ -1,6 +1,6 @@
 /*
- * This copies the implementation of VSCode
- * https://github.com/Microsoft/vscode/blob/master/src/vs/workbench/services/files/node/watcher/win32/csharpWatcherService.ts
+ * Code for working with CodeHelper.exe was inspired by:
+ * https://github.com/Microsoft/vscode/blob/314e122b16c5c1ca0288c8006e9c9c3039a51cd7/src/vs/workbench/services/files/node/watcher/win32/csharpWatcherService.ts
  */
 
 /*jslint node: true */
