@@ -86,7 +86,7 @@ function normalizeStats(nodeFsStats) {
 /**
  * Watch a file or directory.
  * @param {string} path File or directory to watch.
- * @param {array} ignored List of File or directory to NOT watch.
+ * @param {array} ignored List of entries to ignore during watching.
  */
 function watchPath(path, ignored) {
     if (_watcherMap.hasOwnProperty(path)) {
