@@ -543,6 +543,7 @@ define(function (require, exports, module) {
      * because of FileSystem.prototype._watchOrUnwatchEntry implementation.
      *
      * @param {string} path
+     * @param {Array<string>} ignored
      * @param {function(?string)=} callback
      */
     function unwatchPath(path, ignored, callback) {
