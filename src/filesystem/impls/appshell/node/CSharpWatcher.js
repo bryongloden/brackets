@@ -107,11 +107,11 @@ function watchPath(path, ignored, _watcherMap) {
         });
 
         // Errors
-		handle.on("error", onError);
-		handle.stderr.on("data", onError);
+        handle.on("error", onError);
+        handle.stderr.on("data", onError);
 
-		// Exit
-		handle.on("exit", onExit);
+        // Exit
+        handle.on("exit", onExit);
 
         // Add handler for closing to the _watcherMap
         _watcherMap[path] = {
