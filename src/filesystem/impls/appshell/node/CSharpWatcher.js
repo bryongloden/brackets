@@ -11,7 +11,7 @@ var fs = require("fs");
 var fspath = require("path");
 var cp = require("child_process");
 var anymatch = require('anymatch');
-var fwm = require("./FileWatcherManager");
+var FileWatcherManager = require("./FileWatcherManager");
 
 function buildMatcher(ignored) {
     // in case of a glob like **/.git we want also to ignore its contents **/.git/**
@@ -71,23 +71,23 @@ function watchPath(path, ignored, _watcherMap) {
                 if (err) {
                     console.warn("CSharpWatcher err getting stats: " + err.toString());
                 }
-                fwm.emitChange(event, parentDirPath, entryName, nodeFsStats);
+                FileWatcherManager.emitChange(event, parentDirPath, entryName, nodeFsStats);
             });
         } else {
-            fwm.emitChange(event, parentDirPath, entryName, null);
+            FileWatcherManager.emitChange(event, parentDirPath, entryName, null);
         }
     }
 
     function onError(err) {
         console.warn("CSharpWatcher process error: " + err.toString());
-        fwm.unwatchPath(path);
+        FileWatcherManager.unwatchPath(path);
     }
 
     function onExit(code, signal) {
         if (!closing || signal !== "SIGTERM") {
             console.warn("CSharpWatcher terminated unexpectedly with code: " + code + ", signal: " + signal);
         }
-        fwm.unwatchPath(path);
+        FileWatcherManager.unwatchPath(path);
     }
 
     try {
